@@ -30,6 +30,7 @@ namespace GigHub
                 .AddDefaultTokenProviders();
 
             // Add application services.
+            services.AddScoped<ApplicationDbContext>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
