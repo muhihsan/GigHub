@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using GigHub.Data;
 using GigHub.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace GigHub.Controllers
 {
     public class GigsController : Controller
@@ -15,8 +13,7 @@ namespace GigHub.Controllers
         {
             _context = context;
         }
-
-        // GET: /<controller>/
+        
         public IActionResult Create()
         {
             var viewModel = new GigFormViewModel
