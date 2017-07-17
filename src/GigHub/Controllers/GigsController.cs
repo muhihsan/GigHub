@@ -33,6 +33,7 @@ namespace GigHub.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(GigFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
