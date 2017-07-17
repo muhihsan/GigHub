@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GigHub.Data.Migrations
+namespace GigHub.Migrations
 {
     public partial class PopulateGenresTable : Migration
     {

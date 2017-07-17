@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace GigHub.Data.Migrations
+namespace GigHub.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170713131059_OverrideConventionsForGigsAndGenres")]
-    partial class OverrideConventionsForGigsAndGenres
+    [Migration("20170717000908_PopulateGenresTable")]
+    partial class PopulateGenresTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
