@@ -92,6 +92,12 @@ body {
     border-radius: 9px;
 }
 
+.form-control:focus {
+    border-color: #2196f3;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
 .btn {
     font-size: 17px;
     padding: 7px 20px;
