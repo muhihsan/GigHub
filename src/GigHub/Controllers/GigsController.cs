@@ -35,15 +35,11 @@ namespace GigHub.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(GigFormViewModel viewModel)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var artist = _context.Users.Single(u => u.Id == user.Id);
-            var genre = _context.Genres.Single(g => g.Id == viewModel.Genre);
-
             var gig = new Gig
             {
-                Artist = artist,
+                ArtistId = _userManager.GetUserId(User),
                 DateTime = DateTime.Parse($"{viewModel.Date} {viewModel.Time}"),
-                Genre = genre,
+                GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };
 
