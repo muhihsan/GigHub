@@ -1,4 +1,4 @@
-﻿namespace GigHub.Models.ManageViewModels
+﻿namespace GigHub.ViewModels.ManageViewModels
 {
     public class RemoveLoginViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace GigHub.Models.ManageViewModels
+namespace GigHub.ViewModels.ManageViewModels
 {
     public class ConfigureTwoFactorViewModel
     {

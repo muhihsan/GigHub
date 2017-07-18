@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace GigHub.Models.ManageViewModels
+namespace GigHub.ViewModels.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

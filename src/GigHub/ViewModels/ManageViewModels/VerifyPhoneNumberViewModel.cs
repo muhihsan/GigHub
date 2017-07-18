@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Models.ManageViewModels
+namespace GigHub.ViewModels.ManageViewModels
 {
     public class VerifyPhoneNumberViewModel
     {
