@@ -23,12 +23,18 @@ namespace GigHub.Controllers
             _userManager = userManager;
         }
         
+        [HttpPost]
         public async Task<IActionResult> Attend([FromBody] int gigId)
         {
+            var userId = _userManager.GetUserId(User);
+
+            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.GigId == gigId))
+                return BadRequest("The attendance already exists.");
+
             var attendance = new Attendance
             {
                 GigId = gigId,
-                AttendeeId = _userManager.GetUserId(User)
+                AttendeeId = userId
             };
 
             await _context.Attendances.AddAsync(attendance);
