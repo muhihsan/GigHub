@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace GigHub.Controllers
 {
     [Authorize]
+    [Route("api/[controller]")]
     public class FollowingsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +24,7 @@ namespace GigHub.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost]
+        [HttpPost("follow")]
         public async Task<IActionResult> Follow(FollowingDto dto)
         {
             var userId = _userManager.GetUserId(User);
