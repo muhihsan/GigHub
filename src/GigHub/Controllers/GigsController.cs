@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace GigHub.Controllers
 {
+    [Authorize]
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,7 +21,6 @@ namespace GigHub.Controllers
             _userManager = userManager;
         }
         
-        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new GigFormViewModel
@@ -30,7 +30,6 @@ namespace GigHub.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GigFormViewModel viewModel)
