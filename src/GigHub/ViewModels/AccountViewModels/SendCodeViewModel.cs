@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace GigHub.Models.AccountViewModels
+namespace GigHub.ViewModels.AccountViewModels
 {
     public class SendCodeViewModel
     {

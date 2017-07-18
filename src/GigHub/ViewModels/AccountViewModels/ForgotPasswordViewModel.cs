@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Models.AccountViewModels
+namespace GigHub.ViewModels.AccountViewModels
 {
     public class ForgotPasswordViewModel
     {

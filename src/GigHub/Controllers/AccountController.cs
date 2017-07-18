@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using GigHub.Models;
-using GigHub.Models.AccountViewModels;
+using GigHub.ViewModels.AccountViewModels;
 using GigHub.Services;
 
 namespace GigHub.Controllers
