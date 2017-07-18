@@ -7,6 +7,7 @@ using GigHub.Data;
 using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using GigHub.Dto;
 
 namespace GigHub.Controllers
 {
@@ -23,17 +24,17 @@ namespace GigHub.Controllers
             _userManager = userManager;
         }
         
-        [HttpPost]
-        public async Task<IActionResult> Attend([FromBody] int gigId)
+        [HttpPost("attend")]
+        public async Task<IActionResult> Attend([FromBody] AttendanceDto dto)
         {
             var userId = _userManager.GetUserId(User);
 
-            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.GigId == gigId))
+            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.GigId == dto.GigId))
                 return BadRequest("The attendance already exists.");
 
             var attendance = new Attendance
             {
-                GigId = gigId,
+                GigId = dto.GigId,
                 AttendeeId = userId
             };
 

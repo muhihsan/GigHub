@@ -15,8 +15,32 @@
             <div class="details">
                 <span class="artist">@gig.Artist.Name</span>
                 <span class="genre">@gig.Genre.Name</span>
-                <button class="btn btn-default btn-sm pull-right">Going ?</button>
+                <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going ?</button>
             </div>
         </li>
     }
 </ul>
+
+@section Scripts 
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.ajax({
+                    url: "/api/attendances/attend",
+                    type: "POST",
+                    data: JSON.stringify({"GigId": button.attr("data-gig-id")}),
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        button.removeClass("btn-default").addClass("btn-info").text("Going");
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        alert("Something failed!");
+                    }
+                });
+            });
+        });
+    </script>
+}
