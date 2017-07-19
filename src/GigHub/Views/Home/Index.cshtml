@@ -46,9 +46,9 @@
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
                 $.ajax({
-                    url: "/api/followings/attend",
+                    url: "/api/followings/follow",
                     type: "POST",
-                    data: JSON.stringify({ "followeeId": button.attr("data-user-id") }),
+                    data: JSON.stringify({"FolloweeId": button.attr("data-user-id")}),
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         button.text("Following");

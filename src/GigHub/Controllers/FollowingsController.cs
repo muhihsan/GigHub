@@ -25,7 +25,7 @@ namespace GigHub.Controllers
         }
 
         [HttpPost("follow")]
-        public async Task<IActionResult> Follow(FollowingDto dto)
+        public async Task<IActionResult> Follow([FromBody] FollowingDto dto)
         {
             var userId = _userManager.GetUserId(User);
 
