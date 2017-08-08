@@ -1,10 +1,10 @@
 ﻿@model GigFormViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = Model.Heading;
 }
 
-<h1>Add a Gig</h1>
+<h1>Model.Heading</h1>
 
 <form asp-controller="Gigs" asp-action="Create" method="post">
     <p class="alert alert-info">All fields are <strong>required</strong>.</p>
