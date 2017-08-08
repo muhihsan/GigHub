@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,10 +22,23 @@ namespace GigHub.Controllers
             _context = context;
             _userManager = userManager;
         }
+        
+        public IActionResult Mine()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var gigs = _context.Gigs
+                .Where(g => g.ArtistId == userId && g.DateTime > DateTime.Now)
+                .Include(g => g.Genre)
+                .ToList();
+
+            return View(gigs);
+        }
 
         public IActionResult Attending()
         {
             var userId = _userManager.GetUserId(User);
+
             var gigs = _context.Attendances
                 .Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
