@@ -18,7 +18,7 @@
                 <span class="artist">@gig.Venue</span>
                 <span class="genre">@gig.Genre.Name</span>
                 <div class="actions">
-                    <a href="">Edit</a>
+                    <a asp-area="" asp-controller="Gigs" asp-action="Edit" asp-route-id="@gig.Id">Edit</a>
                 </div>
             </div>
         </li>
