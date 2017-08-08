@@ -4,21 +4,19 @@ using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GigHub.Controllers
+namespace GigHub.Controllers.Api
 {
     [Authorize]
-    [Route("api/[controller]")]
-    public class FollowingsController : Controller
+    [Route("api/followings")]
+    public class FollowingsApiController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public FollowingsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public FollowingsApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
