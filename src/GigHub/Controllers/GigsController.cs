@@ -62,7 +62,7 @@ namespace GigHub.Controllers
             {
                 Genres = _context.Genres.ToList()
             };
-            return View(viewModel);
+            return View("GigForm", viewModel);
         }
 
         public IActionResult Edit(int id)
@@ -80,7 +80,7 @@ namespace GigHub.Controllers
                 Genre = gig.GenreId,
                 Venue = gig.Venue
             };
-            return View(viewModel);
+            return View("GigForm", viewModel);
         }
 
         [HttpPost]
