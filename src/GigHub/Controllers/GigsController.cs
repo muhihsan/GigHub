@@ -86,7 +86,7 @@ namespace GigHub.Controllers
             await _context.Gigs.AddAsync(gig);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Mine");
         }
     }
 }
