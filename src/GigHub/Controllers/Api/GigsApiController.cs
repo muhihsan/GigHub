@@ -28,7 +28,8 @@ namespace GigHub.Controllers.Api
             var userId = _userManager.GetUserId(User);
 
             var gig = _context.Gigs
-                .Include(g => g.Attendances.Select(a => a.Attendee))
+                .Include(g => g.Attendances)
+                .ThenInclude(a => a.Attendee)
                 .Single(g => g.Id == id && g.ArtistId == userId);
 
             if (gig.IsCancelled)
