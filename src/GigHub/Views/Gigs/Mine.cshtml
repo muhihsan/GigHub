@@ -56,8 +56,10 @@
                                     link.parents('li').fadeOut(function () {
                                         $(this).remove();
                                     });
+                                    bootbox.hideAll();
                                 })
                                 .fall(function () {
+                                    bootbox.hideAll();
                                     alert('Something fail');
                                 });
                             }
