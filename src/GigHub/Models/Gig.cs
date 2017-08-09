@@ -28,7 +28,7 @@ namespace GigHub.Models
         [Required]
         public byte GenreId { get; set; }
 
-        public ICollection<Attendance> Attendances { get; }
+        public ICollection<Attendance> Attendances { get; private set; }
 
         public Gig()
         {

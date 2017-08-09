@@ -26,20 +26,20 @@ namespace GigHub.Data
             // Add your customizations after calling base.OnModelCreating(builder);
             
             builder.Entity<Attendance>()
-                .HasOne(p => p.Gig)
-                .WithMany()
+                .HasOne(a => a.Gig)
+                .WithMany(g => g.Attendances)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Attendance>()
-                .HasKey(c => new { c.GigId, c.AttendeeId });
+                .HasKey(a => new { a.GigId, a.AttendeeId });
 
             builder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followers)
+                .HasMany(a => a.Followers)
                 .WithOne(f => f.Followee)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followees)
+                .HasMany(a => a.Followees)
                 .WithOne(f => f.Follower)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -51,7 +51,7 @@ namespace GigHub.Data
 
             builder.Entity<UserNotification>()
                 .HasOne(u => u.User)
-                .WithMany()
+                .WithMany(u => u.UserNotifications)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

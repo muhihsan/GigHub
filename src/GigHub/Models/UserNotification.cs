@@ -6,14 +6,14 @@ namespace GigHub.Models
     public class UserNotification
     {
         [Column(Order = 1)]
-        public string UserId { get; }
+        public string UserId { get; private set; }
 
         [Column(Order = 2)]
-        public int NotificationId { get; }
+        public int NotificationId { get; private set; }
 
-        public ApplicationUser User { get; }
+        public ApplicationUser User { get; private set; }
 
-        public Notification Notification { get; }
+        public Notification Notification { get; private set; }
 
         public bool IsRead { get; set; }
 
