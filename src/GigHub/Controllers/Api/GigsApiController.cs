@@ -35,13 +35,7 @@ namespace GigHub.Controllers.Api
 
             gig.IsCancelled = true;
 
-            var notification = new Notification
-            {
-                DateTime = DateTime.Now,
-                Gig = gig,
-                Type = NotificationType.GigCancelled
-            };
-
+            var notification = new Notification(gig, NotificationType.GigCancelled);
             _context.Attendances
                 .Where(a => a.GigId == gig.Id)
                 .ToList()

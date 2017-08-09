@@ -17,5 +17,16 @@ namespace GigHub.Models
 
         [Required]
         public Gig Gig { get; set; }
+        
+        public Notification()
+        {
+        }
+
+        public Notification(Gig gig, NotificationType type)
+        {
+            Gig = gig ?? throw new ArgumentNullException("gig");
+            Type = type;
+            DateTime = DateTime.Now;
+        }
     }
 }
