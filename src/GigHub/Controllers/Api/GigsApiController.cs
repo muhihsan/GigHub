@@ -21,7 +21,7 @@ namespace GigHub.Controllers.Api
             _userManager = userManager;
         }
 
-        [HttpDelete("cancel")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Cancel(int id)
         {
             var userId = _userManager.GetUserId(User);
