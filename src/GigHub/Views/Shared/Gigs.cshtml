@@ -41,7 +41,7 @@
                 var button = $(e.target);
                 $.ajax({
                     url: "/api/attendances/attend",
-                    type: "POST",
+                    method: "POST",
                     data: JSON.stringify({"GigId": button.attr("data-gig-id")}),
                     contentType: "application/json; charset=utf-8",
                     success: function () {
@@ -57,7 +57,7 @@
                 var button = $(e.target);
                 $.ajax({
                     url: "/api/followings/follow",
-                    type: "POST",
+                    method: "POST",
                     data: JSON.stringify({"FolloweeId": button.attr("data-user-id")}),
                     contentType: "application/json; charset=utf-8",
                     success: function () {
