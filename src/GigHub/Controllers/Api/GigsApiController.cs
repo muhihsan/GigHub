@@ -42,13 +42,10 @@ namespace GigHub.Controllers.Api
                 Type = NotificationType.GigCancelled
             };
 
-            var userNotifications = _context.Attendances
+            _context.Attendances
                 .Where(a => a.GigId == gig.Id)
-                .Select(u => new UserNotification
-                {
-                    User = u.Attendee,
-                    Notification = notification
-                });
+                .ToList()
+                .ForEach(a => a.Attendee.Notify(notification));
 
             await _context.UserNotifications.AddRangeAsync(userNotifications);
 
