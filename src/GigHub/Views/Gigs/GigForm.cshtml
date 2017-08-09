@@ -6,8 +6,10 @@
 
 <h1>Model.Heading</h1>
 
-<form asp-controller="Gigs" asp-action="Create" method="post">
+<form asp-controller="Gigs" asp-action="@Model.Action" method="post">
     <p class="alert alert-info">All fields are <strong>required</strong>.</p>
+
+    <input asp-for="Id" type="hidden" />
 
     <div class="form-group">
         <label asp-for="Venue"></label>

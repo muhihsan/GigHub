@@ -75,6 +75,7 @@ namespace GigHub.Controllers
 
             var viewModel = new GigFormViewModel
             {
+                Id = gig.Id,
                 Genres = _context.Genres.ToList(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
@@ -92,7 +93,7 @@ namespace GigHub.Controllers
             if (!ModelState.IsValid)
             {
                 viewModel.Genres = _context.Genres.ToList();
-                return View("Create", viewModel);
+                return View("GigForm", viewModel);
             }
 
             var gig = new Gig
@@ -104,6 +105,29 @@ namespace GigHub.Controllers
             };
 
             await _context.Gigs.AddAsync(gig);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Mine");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(GigFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = _context.Genres.ToList();
+                return View("GigForm", viewModel);
+            }
+
+            var userId = _userManager.GetUserId(User);
+
+            var gig = _context.Gigs
+                .Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
+            gig.Venue = viewModel.Venue;
+            gig.DateTime = viewModel.GetDateTime();
+            gig.GenreId = viewModel.Genre;
+            
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Mine");
