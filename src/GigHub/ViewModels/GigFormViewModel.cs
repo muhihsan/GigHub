@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using GigHub.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace GigHub.ViewModels
 {
