@@ -47,8 +47,6 @@ namespace GigHub.Controllers.Api
                 .ToList()
                 .ForEach(a => a.Attendee.Notify(notification));
 
-            await _context.UserNotifications.AddRangeAsync(userNotifications);
-
             await _context.SaveChangesAsync();
 
             return Ok();
