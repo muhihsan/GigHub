@@ -3,6 +3,7 @@ using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,7 @@ namespace GigHub.Controllers.Api
             var userId = _userManager.GetUserId(User);
 
             var gig = _context.Gigs
+                .Include(g => g.Attendances.Select(a => a.Attendee))
                 .Single(g => g.Id == id && g.ArtistId == userId);
 
             if (gig.IsCancelled)
@@ -35,10 +37,7 @@ namespace GigHub.Controllers.Api
             gig.IsCancelled = true;
 
             var notification = new Notification(gig, NotificationType.GigCancelled);
-            _context.Attendances
-                .Where(a => a.GigId == gig.Id)
-                .ToList()
-                .ForEach(a => a.Attendee.Notify(notification));
+            gig.Attendances.ToList().ForEach(a => a.Attendee.Notify(notification));
 
             await _context.SaveChangesAsync();
 
