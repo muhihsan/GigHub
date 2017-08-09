@@ -88,7 +88,7 @@ namespace GigHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(GigFormViewModel viewModel)
+        public IActionResult Create(GigFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -104,15 +104,15 @@ namespace GigHub.Controllers
                 Venue = viewModel.Venue
             };
 
-            await _context.Gigs.AddAsync(gig);
-            await _context.SaveChangesAsync();
+            _context.Gigs.Add(gig);
+            _context.SaveChanges();
 
             return RedirectToAction("Mine");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(GigFormViewModel viewModel)
+        public IActionResult Update(GigFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -128,7 +128,7 @@ namespace GigHub.Controllers
             gig.DateTime = viewModel.GetDateTime();
             gig.GenreId = viewModel.Genre;
             
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return RedirectToAction("Mine");
         }
