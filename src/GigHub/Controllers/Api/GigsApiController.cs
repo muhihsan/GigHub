@@ -3,6 +3,7 @@ using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,6 +34,23 @@ namespace GigHub.Controllers.Api
                 return NotFound();
 
             gig.IsCancelled = true;
+
+            var notification = new Notification
+            {
+                DateTime = DateTime.Now,
+                Gig = gig,
+                Type = NotificationType.GigCancelled
+            };
+
+            var userNotifications = _context.Attendances
+                .Where(a => a.GigId == gig.Id)
+                .Select(u => new UserNotification
+                {
+                    User = u.Attendee,
+                    Notification = notification
+                });
+
+            await _context.UserNotifications.AddRangeAsync(userNotifications);
 
             await _context.SaveChangesAsync();
 
