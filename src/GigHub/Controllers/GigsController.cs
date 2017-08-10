@@ -65,7 +65,7 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Update(int id)
         {
             var userId = _userManager.GetUserId(User);
 
