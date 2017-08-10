@@ -10,6 +10,5 @@ namespace GigHub.Dto
         public DateTime DateTime { get; set; }
         public string Venue { get; set; }
         public GenreDto Genre { get; set; }
-        public byte GenreId { get; set; }
     }
 }

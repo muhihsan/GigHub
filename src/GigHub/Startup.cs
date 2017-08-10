@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GigHub.Data;
 using GigHub.Models;
 using GigHub.Services;
+using GigHub.Dto;
 
 namespace GigHub
 {
@@ -53,6 +54,15 @@ namespace GigHub
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            AutoMapper.Mapper.Initialize(cfg => {
+                cfg.CreateMap<Attendance, AttendanceDto>();
+                cfg.CreateMap<ApplicationUser, UserDto>();
+                cfg.CreateMap<Following, FollowingDto>();
+                cfg.CreateMap<Genre, GenreDto>();
+                cfg.CreateMap<Gig, GigDto>();
+                cfg.CreateMap<Notification, NotificationDto>();
+            });
 
             app.UseMvc(routes =>
             {

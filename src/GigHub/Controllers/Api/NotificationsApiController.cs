@@ -1,4 +1,6 @@
-﻿using GigHub.Data;
+﻿using AutoMapper;
+using GigHub.Data;
+using GigHub.Dto;
 using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -31,7 +33,7 @@ namespace GigHub.Controllers.Api
                 .Select(un => un.Notification)
                 .Include(n => n.Gig.Artist);
 
-            return Ok(notifications);
+            return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
         }
     }
 }
