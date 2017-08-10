@@ -8,6 +8,8 @@ using GigHub.Data;
 using GigHub.Models;
 using GigHub.Services;
 using GigHub.Helpers;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GigHub
 {
@@ -34,7 +36,12 @@ namespace GigHub
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            services.AddMvc();
+            services.AddMvc()
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.Formatting = Formatting.Indented;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
