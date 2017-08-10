@@ -37,7 +37,7 @@ namespace GigHub.Models
 
         public void Modify(string venue, DateTime dateTime, byte genreId)
         {
-            NotifyAttendences(new Notification(this, NotificationType.GigUpdated, DateTime, Venue));
+            NotifyAttendences(Notification.GigUpdated(this, DateTime, Venue));
             Venue = venue;
             DateTime = dateTime;
             GenreId = genreId;
@@ -45,7 +45,7 @@ namespace GigHub.Models
 
         public void Cancel()
         {
-            NotifyAttendences(new Notification(this, NotificationType.GigCancelled));
+            NotifyAttendences(Notification.GigCancelled(this));
             IsCancelled = true;
         }
 

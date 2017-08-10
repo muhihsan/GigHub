@@ -22,18 +22,33 @@ namespace GigHub.Models
         {
         }
 
-        public Notification(Gig gig, NotificationType type)
+        private Notification(NotificationType type, Gig gig)
         {
             Gig = gig ?? throw new ArgumentNullException("gig");
             Type = type;
             DateTime = DateTime.Now;
         }
 
-        public Notification(Gig gig, NotificationType type, DateTime originalDateTime, string originalVenue)
-            : this(gig, type)
+        private Notification(NotificationType type, Gig gig, DateTime originalDateTime, string originalVenue)
+            : this(type, gig)
         {
             OriginalDateTime = originalDateTime;
             OriginalVenue = originalVenue;
+        }
+
+        public static Notification GigCreated(Gig newGig)
+        {
+            return new Notification(NotificationType.GigCreated, newGig);
+        }
+
+        public static Notification GigUpdated(Gig newGig, DateTime originalDateTime, string originalVenue)
+        {
+            return new Notification(NotificationType.GigUpdated, newGig, originalDateTime, originalVenue);
+        }
+
+        public static Notification GigCancelled(Gig newGig)
+        {
+            return new Notification(NotificationType.GigCancelled, newGig);
         }
     }
 }
