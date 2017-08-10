@@ -69,5 +69,15 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/api/notifications", function (notifications) {
+                $(".js-notifications-count")
+                    .text(notifications.length)
+                    .removeClass("hide");
+            });
+        });
+    </script>
 </body>
 </html>
