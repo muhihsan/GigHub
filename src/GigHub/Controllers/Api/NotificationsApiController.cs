@@ -21,7 +21,7 @@ namespace GigHub.Controllers.Api
             _userManager = userManager;
         }
 
-        [HttpGet("newNotifications")]
+        [HttpGet]
         public IActionResult GetNewNotifications()
         {
             var userId = _userManager.GetUserId(User);
