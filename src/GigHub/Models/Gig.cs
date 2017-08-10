@@ -8,7 +8,7 @@ namespace GigHub.Models
 {
     public class Gig
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         public bool IsCancelled { get; private set; }
 
@@ -35,10 +35,22 @@ namespace GigHub.Models
             Attendances = new Collection<Attendance>();
         }
 
+        public void Modify(string venue, DateTime dateTime, byte genreId)
+        {
+            NotifyAttendences(new Notification(this, NotificationType.GigUpdated, DateTime, Venue));
+            Venue = venue;
+            DateTime = dateTime;
+            GenreId = genreId;
+        }
+
         public void Cancel()
         {
+            NotifyAttendences(new Notification(this, NotificationType.GigCancelled));
             IsCancelled = true;
-            var notification = new Notification(this, NotificationType.GigCancelled);
+        }
+
+        private void NotifyAttendences(Notification notification)
+        {
             Attendances.ToList().ForEach(a => a.Attendee.Notify(notification));
         }
     }

@@ -28,5 +28,12 @@ namespace GigHub.Models
             Type = type;
             DateTime = DateTime.Now;
         }
+
+        public Notification(Gig gig, NotificationType type, DateTime originalDateTime, string originalVenue)
+            : this(gig, type)
+        {
+            OriginalDateTime = originalDateTime;
+            OriginalVenue = originalVenue;
+        }
     }
 }

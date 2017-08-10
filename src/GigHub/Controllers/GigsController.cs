@@ -122,10 +122,11 @@ namespace GigHub.Controllers
             var userId = _userManager.GetUserId(User);
 
             var gig = _context.Gigs
+                .Include(g => g.Attendances)
+                .ThenInclude(a => a.Attendee)
                 .Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
-            gig.Venue = viewModel.Venue;
-            gig.DateTime = viewModel.GetDateTime();
-            gig.GenreId = viewModel.Genre;
+
+            gig.Modify(viewModel.Venue, viewModel.GetDateTime(), viewModel.Genre);
             
             _context.SaveChanges();
 
