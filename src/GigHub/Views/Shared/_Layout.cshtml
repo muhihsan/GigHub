@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -61,7 +63,8 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-
+@if (SignInManager.IsSignedIn(User))
+{
     <script type="text/x-template" id="notifications-template">
         <ul class="notifications">
             <% _.each(notifications, function (notification) {
@@ -121,5 +124,6 @@
             });
         });
     </script>
+}
 </body>
 </html>
