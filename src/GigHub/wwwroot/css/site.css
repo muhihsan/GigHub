@@ -125,6 +125,8 @@ body {
   border-color: #2196f3;
   box-shadow: none;
   -webkit-box-shadow: none;
+  transition: none;
+  -webkit-transition: none;
 }
 .btn {
   /*font-size: 17px;
