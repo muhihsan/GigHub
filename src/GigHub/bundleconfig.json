@@ -23,22 +23,13 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/lib/bootbox/bootbox.min.js",
+    "outputFileName": "wwwroot/lib/lib.min.js",
     "inputFiles": [
-      "wwwroot/lib/bootbox/bootbox.js"
-    ],
-    // Optionally specify minification options
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    },
-    // Optionally generate .map file
-    "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/lib/moment/moment.min.js",
-    "inputFiles": [
-      "wwwroot/lib/moment/moment.js"
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "wwwroot/lib/bootbox/bootbox.js",
+      "wwwroot/lib/moment/moment.js",
+      "wwwroot/lib/jquery/dist/underscore.js"
     ],
     // Optionally specify minification options
     "minify": {
