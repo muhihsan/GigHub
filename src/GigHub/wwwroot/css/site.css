@@ -24,15 +24,15 @@ span.field-validation-error {
   line-height: 1.4;
 }
 /* buttons and links extension to use brackets: [ click me ] */
-.btn-bracketed::before {
+.btn-bracketed {
   display: inline-block;
-  content: "[";
   padding-right: 0.5em;
 }
-.btn-bracketed::after {
-  display: inline-block;
+.btn-bracketed ::before {
+  content: "[";
+}
+.btn-bracketed ::after {
   content: "]";
-  padding-left: 0.5em;
 }
 .dl-horizontal dt {
   white-space: normal;
@@ -78,6 +78,11 @@ span.field-validation-error {
 .navbar-inverse .navbar-nav > li > a {
   color: #fff;
 }
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: rgba(205, 40, 39, 0.55);
+}
 .navbar-inverse .navbar-brand {
   color: #fff;
 }
@@ -89,11 +94,6 @@ span.field-validation-error {
   top: 8px;
   right: 0;
   background: #a80a0a;
-}
-.navbar-inverse .navbar-nav > .open > a,
-.navbar-inverse .navbar-nav > .open > a:hover,
-.navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: rgba(205, 40, 39, 0.55);
 }
 .navbar-brand {
   font-weight: 700;
@@ -121,7 +121,7 @@ body {
   -ms-border-radius: 9px;
   border-radius: 9px;
 }
-.form-control:focus {
+.form-control :focus {
   border-color: #2196f3;
   box-shadow: none;
   -webkit-box-shadow: none;
@@ -176,7 +176,7 @@ body {
   font-size: 15px;
   display: none;
 }
-.gigs > li:hover .actions {
+.gigs > li :hover .actions {
   display: block;
 }
 .popover-notifications .popover-content {

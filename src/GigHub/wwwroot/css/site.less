@@ -29,16 +29,17 @@ span.field-validation-error {
 }
 
 /* buttons and links extension to use brackets: [ click me ] */
-.btn-bracketed::before {
+.btn-bracketed {
     display: inline-block;
-    content: "[";
     padding-right: 0.5em;
-}
 
-.btn-bracketed::after {
-    display: inline-block;
-    content: "]";
-    padding-left: 0.5em;
+    ::before {
+        content: "[";
+    }
+
+    ::after {
+        content: "]";
+    }
 }
 
 .dl-horizontal dt {
@@ -91,29 +92,33 @@ span.field-validation-error {
 .navbar-inverse {
     background-color: #ff4342;
     border-color: #ff4342;
-}
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #fff;
-}
+    .navbar-nav {
+        > li > a {
+            color: #fff;
+        }
 
-.navbar-inverse .navbar-brand {
-    color: #fff;
-}
+        > .open {
+            > a , > a:hover, > a:focus {
+                background-color: rgba(205, 40, 39, 0.55);
+            }
+        }
+    }
 
-.navbar-inverse .notifications {
-    position: relative;
-}
+    .navbar-brand {
+        color: #fff;
+    }
 
-.navbar-inverse .notifications .badge {
-    position: absolute;
-    top: 8px;
-    right: 0;
-    background: #a80a0a;
-}
+    .notifications {
+        position: relative;
 
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: rgba(205, 40, 39, 0.55);
+        .badge {
+            position: absolute;
+            top: 8px;
+            right: 0;
+            background: #a80a0a;
+        }
+    }
 }
 
 .navbar-brand {
@@ -147,12 +152,12 @@ body {
     height: 44px;
     -ms-border-radius: 9px;
     border-radius: 9px;
-}
 
-.form-control:focus {
-    border-color: #2196f3;
-    box-shadow: none;
-    -webkit-box-shadow: none;
+    :focus {
+        border-color: #2196f3;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
 }
 
 .btn {
@@ -165,58 +170,58 @@ body {
 /* Page-level styles */
 .gigs {
     list-style: none;
-}
 
-.gigs > li {
-    position: relative;
-    margin-bottom: 30px;
-}
+    > li {
+        position: relative;
+        margin-bottom: 30px;
 
-.gigs > li .date {
-    background: red;
-    color: white;
-    text-align: center;
-    width: 60px;
-    -ms-border-radius: 8px;
-    border-radius: 8px;
-}
+        .date {
+            background: red;
+            color: white;
+            text-align: center;
+            width: 60px;
+            -ms-border-radius: 8px;
+            border-radius: 8px;
 
-.gigs > li .date .month {
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 2px 6px;
-}
+            .month {
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 2px 6px;
+            }
 
-.gigs > li .date .day {
-    background: #f7f7f7;
-    color: #333;
-    font-size: 20px;
-    padding: 6px 12px;
-}
+            .day {
+                background: #f7f7f7;
+                color: #333;
+                font-size: 20px;
+                padding: 6px 12px;
+            }
+        }
 
-.gigs > li .details {
-    position: absolute;
-    top: 0;
-    left: 70px;
-}
+        .details {
+            position: absolute;
+            top: 0;
+            left: 70px;
 
-.gigs > li .details .artist {
-    font-weight: bold;
-    display: block;
-}
+            .artist {
+                font-weight: bold;
+                display: block;
+            }
 
-.gigs > li .details .genre {
-    font-size: 15px;
-}
+            .genre {
+                font-size: 15px;
+            }
+        }
 
-.gigs > li .actions {
-    font-size: 15px;
-    display: none;
-}
+        .actions {
+            font-size: 15px;
+            display: none;
+        }
 
-.gigs > li:hover .actions {
-    display: block;
+        :hover .actions {
+            display: block;
+        }
+    }
 }
 
 .popover-notifications {
