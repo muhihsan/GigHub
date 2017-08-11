@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GigHub.Controllers.Api
 {
@@ -34,6 +35,21 @@ namespace GigHub.Controllers.Api
                 .Include(n => n.Gig.Artist);
 
             return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var notifications = _context.UserNotifications
+                .Where(un => un.UserId == userId && !un.IsRead);
+
+            await notifications.ForEachAsync(n => n.Read());
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }
