@@ -50,6 +50,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/bootbox/bootbox.js"></script>
+        <script src="~/lib/underscore/underscore.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -66,18 +67,59 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/lib/bootbox/bootbox.min.js"></script>
+        <script src="~/lib/underscore/underscore-min.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
+    <script type="text/x-template" id="notifications-template">
+        <ul>
+            <% _.each(notifications, function (notification) {
+                    if (notification.type == 1) { %>
+                        <li><%= notification.gig.artist.name %> has cancelled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %></li>
+                    <% }
+                    else if (notification.type == 2) {
+                        var changes = [],
+                            originalValues = [],
+                            newValues = [];
+                        
+                        if (notification.originalVenue != notification.gig.venue) {
+                            changes.push('venue');
+                            originalValues.push(notification.originalVenue);
+                            newValues.push(notification.gig.venue);
+                        }
 
+                        if (notification.originalDateTime != notification.gig.dateTime) {
+                            changes.push('date/time');
+                            originalValues.push(notificaiton.originalDateTime);
+                            newValues.push(notification.gig.dateTime);
+                        } %>
+
+                        <li><%= notification.gig.artist.name %> has changed the <% changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
+                    <% }
+            }); %>
+        </ul>
+    </script>
     <script>
         $(document).ready(function () {
-            $.getJSON("/api/notifications", function (notifications) {
-                $(".js-notifications-count")
+            $.getJSON('/api/notifications', function (notifications) {
+                if (notifications.length === 0)
+                    return;
+
+                $('.js-notifications-count')
                     .text(notifications.length)
-                    .removeClass("hide")
-                    .addClass("animated zoomIn");
+                    .removeClass('hide')
+                    .addClass('animated zoomIn');
+                
+                $('.notifications').popover({
+                    html: true,
+                    title: 'Notifications',
+                    content: function () {
+                        var compiled = _.template($('#notifications-template').html());
+                        return compiled({ notifications: notifications });
+                    },
+                    placement: 'bottom'
+                });
             });
         });
     </script>
