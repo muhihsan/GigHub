@@ -24,7 +24,7 @@ namespace GigHub.Controllers.Api
             _userManager = userManager;
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public IActionResult GetNewNotifications()
         {
             var userId = _userManager.GetUserId(User);
@@ -38,7 +38,7 @@ namespace GigHub.Controllers.Api
             return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
         }
 
-        [HttpPost]
+        [HttpPost("markAsRead")]
         public async Task<IActionResult> MarkAsRead()
         {
             var userId = _userManager.GetUserId(User);
