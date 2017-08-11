@@ -33,11 +33,11 @@ span.field-validation-error {
     display: inline-block;
     padding-right: 0.5em;
 
-    ::before {
+    &::before {
         content: "[";
     }
 
-    ::after {
+    &::after {
         content: "]";
     }
 }
@@ -153,7 +153,7 @@ body {
     -ms-border-radius: 9px;
     border-radius: 9px;
 
-    :focus {
+    &:focus {
         border-color: #2196f3;
         box-shadow: none;
         -webkit-box-shadow: none;
@@ -218,7 +218,7 @@ body {
             display: none;
         }
 
-        :hover .actions {
+        &:hover .actions {
             display: block;
         }
     }
