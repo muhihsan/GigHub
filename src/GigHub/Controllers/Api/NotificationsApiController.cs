@@ -32,7 +32,8 @@ namespace GigHub.Controllers.Api
             var notifications = _context.UserNotifications
                 .Where(un => un.UserId == userId && !un.IsRead)
                 .Select(un => un.Notification)
-                .Include(n => n.Gig.Artist);
+                .Include(n => n.Gig.Artist)
+                .ToList();
 
             return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
         }
@@ -43,9 +44,10 @@ namespace GigHub.Controllers.Api
             var userId = _userManager.GetUserId(User);
 
             var notifications = _context.UserNotifications
-                .Where(un => un.UserId == userId && !un.IsRead);
+                .Where(un => un.UserId == userId && !un.IsRead)
+                .ToList();
 
-            await notifications.ForEachAsync(n => n.Read());
+            notifications.ForEach(n => n.Read());
 
             await _context.SaveChangesAsync();
 
