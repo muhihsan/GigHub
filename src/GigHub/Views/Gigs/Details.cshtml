@@ -6,17 +6,17 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 
-<h1>
+<h1 id="gigsInfo">
     @Model.Gig.Artist.Name
     @if (SignInManager.IsSignedIn(User))
     {
         if (Model.IsFollowing)
         {
-            <button class="btn btn-info">Following</button>
+            <button class="btn btn-info js-toggle-follow" data-user-id="@Model.Gig.ArtistId">Following</button>
         }
         else
         {
-            <button class="btn btn-default">Follow</button>
+            <button class="btn btn-default js-toggle-follow" data-user-id="@Model.Gig.ArtistId">Follow</button>
         }
     }
 </h1>
@@ -26,4 +26,13 @@
 @if (SignInManager.IsSignedIn(User) && Model.IsAttending)
 {
     <p>You are going to this event.</p>
+}
+
+@section Scripts 
+{
+    <script>
+        $(document).ready(function () {
+            FollowingsController.init($('#gigsInfo'));
+        });
+    </script>
 }

@@ -13,7 +13,9 @@
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwroot/js/services/attendanceServices.js",
-      "wwroot/js/controllerse/gigsController.js",
+      "wwroot/js/services/followingsService.js",
+      "wwroot/js/controllers/followingsController.js",
+      "wwroot/js/controllers/gigsController.js",
       "wwwroot/js/site.js"
     ],
     // Optionally specify minification options
