@@ -4,11 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-@inject SignInManager<ApplicationUser> SignInManager
-
 <h1 id="gigsInfo">
     @Model.Gig.Artist.Name
-    @if (SignInManager.IsSignedIn(User))
+    @if (User.Identity.IsAuthenticated)
     {
         if (Model.IsFollowing)
         {
@@ -23,7 +21,7 @@
 <p>
     Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM") at @Model.Gig.DateTime.ToString("HH:mm")
 </p>
-@if (SignInManager.IsSignedIn(User) && Model.IsAttending)
+@if (User.Identity.IsAuthenticated && Model.IsAttending)
 {
     <p>You are going to this event.</p>
 }
