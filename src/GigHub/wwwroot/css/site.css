@@ -134,6 +134,9 @@ body {
   -ms-border-radius: 9px;
   border-radius: 9px;
 }
+.gigs > li .details button {
+  float: none !important;
+}
 /* Page-level styles */
 .gigs {
   list-style: none;
@@ -172,7 +175,9 @@ body {
   display: block;
 }
 .gigs > li .details .genre {
-  font-size: 15px;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
 }
 .gigs > li .actions {
   font-size: 15px;
