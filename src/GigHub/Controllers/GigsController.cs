@@ -14,13 +14,11 @@ namespace GigHub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public GigsController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public GigsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
-            _signInManager = signInManager;
             _userManager = userManager;
         }
         
@@ -71,7 +69,7 @@ namespace GigHub.Controllers
 
             var viewModel = new GigDetailsViewModel(gig);
 
-            if (_signInManager.IsSignedIn(User))
+            if (User.Identity.IsAuthenticated)
                 viewModel.GetUserInfo(_userManager.GetUserId(User));
 
             return View(viewModel);
