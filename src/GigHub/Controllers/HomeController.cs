@@ -6,16 +6,19 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
 using GigHub.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index(string query = null)
@@ -24,6 +27,18 @@ namespace GigHub.Controllers
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now && !g.IsCancelled);
+            
+            ILookup<int, Attendance> attendances = null;
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = _userManager.GetUserId(User);
+
+                attendances = _context.Attendances
+                    .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                    .ToList()
+                    .ToLookup(a => a.GigId);
+            }
 
             if (!String.IsNullOrWhiteSpace(query))
             {
@@ -32,13 +47,14 @@ namespace GigHub.Controllers
                         || g.Genre.Name.Contains(query)
                         || g.Venue.Contains(query));
             }
-
+            
             var viewModel = new GigsViewModel
             {
                 UpcomingGigs = upcomingGigs,
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs",
-                SearchTerm = query
+                SearchTerm = query,
+                Attendances = attendances
             };
 
             return View("Gigs", viewModel);
