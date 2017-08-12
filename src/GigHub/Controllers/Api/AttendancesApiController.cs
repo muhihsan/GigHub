@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using GigHub.Dto;
 
-namespace GigHub.Controllers
+namespace GigHub.Controllers.Api
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class AttendancesController : Controller
+    public class AttendancesApiController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AttendancesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public AttendancesApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
