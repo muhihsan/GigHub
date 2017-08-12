@@ -17,7 +17,7 @@
     </div>
 </form>
 
-<ul class="gigs voffset4">
+<ul class="gigs voffset4" id="gigs">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -53,35 +53,7 @@
 {
     <script>
         $(document).ready(function () {
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass('btn-default')) {
-                    $.ajax({
-                        url: "/api/attendances/attend",
-                        method: "POST",
-                        data: JSON.stringify({ "GigId": button.attr("data-gig-id") }),
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            button.removeClass("btn-default").addClass("btn-info").text("Going");
-                        },
-                        error: function () {
-                            alert("Something failed!");
-                        }
-                    });
-                }
-                else {
-                    $.ajax({
-                        url: "/api/attendances/" + button.attr('data-gig-id'),
-                        method: "DELETE",
-                        success: function () {
-                            button.removeClass("btn-info").addClass("btn-default").text("Going ?");
-                        },
-                        error: function () {
-                            alert("Something failed!");
-                        }
-                    });
-                }
-            });
+            GigsController.init($('#gigs'));
 
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
