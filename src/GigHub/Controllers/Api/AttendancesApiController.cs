@@ -10,7 +10,7 @@ using GigHub.Dto;
 namespace GigHub.Controllers.Api
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/attendances")]
     public class AttendancesApiController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,6 +40,23 @@ namespace GigHub.Controllers.Api
             await _context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpDelete("{gigId}")]
+        public async Task<IActionResult> CancelAttandance(int gigId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var attendance = _context.Attendances
+                .SingleOrDefault(a => a.AttendeeId == userId && a.GigId == gigId);
+
+            if (attendance == null)
+                return NotFound();
+
+            _context.Attendances.Remove(attendance);
+            await _context.SaveChangesAsync();
+
+            return Ok(gigId);
         }
     }
 }
