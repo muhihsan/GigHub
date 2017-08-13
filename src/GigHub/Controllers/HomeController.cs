@@ -7,17 +7,23 @@ using System.Linq;
 using System;
 using GigHub.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using GigHub.Repositories;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly AttendanceRepository _attendanceRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public HomeController(
+            ApplicationDbContext context,
+            AttendanceRepository attendanceRepository,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _attendanceRepository = attendanceRepository;
             _userManager = userManager;
         }
 
@@ -34,9 +40,7 @@ namespace GigHub.Controllers
             {
                 var userId = _userManager.GetUserId(User);
 
-                attendances = _context.Attendances
-                    .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                    .ToList()
+                attendances = _attendanceRepository.GetFutureAttendances(userId)
                     .ToLookup(a => a.GigId);
             }
 
