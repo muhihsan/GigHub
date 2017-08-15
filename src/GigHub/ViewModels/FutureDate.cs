@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace GigHub.ViewModels
 {
-    public class FutureDate : ValidationAttribute
+    public sealed class FutureDate : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
