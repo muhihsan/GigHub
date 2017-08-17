@@ -11,6 +11,7 @@ using GigHub.Helpers;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using GigHub.Repositories;
+using GigHub.Persistence;
 
 namespace GigHub
 {
@@ -36,6 +37,7 @@ namespace GigHub
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddScoped<UnitOfWork>();
             services.AddScoped<AttendanceRepository>();
             services.AddScoped<GenreRepository>();
             services.AddScoped<GigRepository>();

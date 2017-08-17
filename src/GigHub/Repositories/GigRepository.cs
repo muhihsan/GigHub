@@ -55,5 +55,10 @@ namespace GigHub.Repositories
         {
             return _context.Gigs.Single(g => g.Id == gigId);
         }
+
+        public void Add(Gig gig)
+        {
+            _context.Gigs.Add(gig);
+        }
     }
 }
