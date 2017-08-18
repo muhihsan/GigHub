@@ -12,12 +12,11 @@ namespace GigHub.Controllers
     [Authorize]
     public class GigsController : Controller
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public GigsController(
-            ApplicationDbContext context,
-            UnitOfWork unitOfWork,
+            IUnitOfWork unitOfWork,
             UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
