@@ -37,10 +37,10 @@ namespace GigHub
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddScoped<UnitOfWork>();
-            services.AddScoped<AttendanceRepository>();
-            services.AddScoped<GenreRepository>();
-            services.AddScoped<GigRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IGigRepository, GigRepository>();
 
             services.AddMvc()
             .AddJsonOptions(options =>
