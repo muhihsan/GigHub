@@ -6,6 +6,7 @@ using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using GigHub.Core.Dtos;
+using GigHub.Core;
 
 namespace GigHub.Controllers.Api
 {
@@ -13,12 +14,14 @@ namespace GigHub.Controllers.Api
     [Route("api/attendances")]
     public class AttendancesApiController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AttendancesApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public AttendancesApiController(
+            IUnitOfWork unitOfWork, 
+            UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
         
@@ -27,17 +30,18 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            if (_context.Attendances.Any(a => a.AttendeeId == userId && a.GigId == dto.GigId))
+            var attendance = _unitOfWork.Attendances.GetAttendance(dto.GigId, userId);
+            if (attendance != null)
                 return BadRequest("The attendance already exists.");
 
-            var attendance = new Attendance
+            attendance = new Attendance
             {
                 GigId = dto.GigId,
                 AttendeeId = userId
             };
 
-            await _context.Attendances.AddAsync(attendance);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Attendances.AddAsync(attendance);
+            await _unitOfWork.CompleteAsync();
 
             return Ok();
         }
@@ -47,14 +51,12 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            var attendance = _context.Attendances
-                .SingleOrDefault(a => a.AttendeeId == userId && a.GigId == gigId);
-
+            var attendance = _unitOfWork.Attendances.GetAttendance(gigId, userId);
             if (attendance == null)
                 return NotFound();
 
-            _context.Attendances.Remove(attendance);
-            await _context.SaveChangesAsync();
+            _unitOfWork.Attendances.Remove(attendance);
+            await _unitOfWork.CompleteAsync();
 
             return Ok(gigId);
         }
