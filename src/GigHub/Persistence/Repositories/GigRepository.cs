@@ -17,7 +17,7 @@ namespace GigHub.Persistence.Repositories
             _context = context;
         }
 
-        public List<Gig> GetGigsUserAttending(string userId)
+        public IEnumerable<Gig> GetGigsUserAttending(string userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
@@ -35,7 +35,7 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public List<Gig> GetUpcomingGigsByArtist(string userId)
+        public IEnumerable<Gig> GetUpcomingGigsByArtist(string userId)
         {
             return _context.Gigs
                 .Where(g => g.ArtistId == userId && g.DateTime > DateTime.Now && !g.IsCancelled)

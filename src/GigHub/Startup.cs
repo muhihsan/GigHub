@@ -40,6 +40,7 @@ namespace GigHub
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IGigRepository, GigRepository>();

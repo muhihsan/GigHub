@@ -16,7 +16,7 @@ namespace GigHub.Persistence.Repositories
             _context = context;
         }
         
-        public List<Attendance> GetFutureAttendances(string userId)
+        public IEnumerable<Attendance> GetFutureAttendances(string userId)
         {
             return _context.Attendances
                                 .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)

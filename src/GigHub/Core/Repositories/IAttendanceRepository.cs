@@ -5,6 +5,6 @@ namespace GigHub.Core.Repositories
 {
     public interface IAttendanceRepository
     {
-        List<Attendance> GetFutureAttendances(string userId);
+        IEnumerable<Attendance> GetFutureAttendances(string userId);
     }
 }

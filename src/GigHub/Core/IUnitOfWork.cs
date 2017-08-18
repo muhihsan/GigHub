@@ -8,6 +8,7 @@ namespace GigHub.Core
         IAttendanceRepository Attendances { get; }
         IGenreRepository Genres { get; }
         IGigRepository Gigs { get; }
+        IApplicationUserRepository Users { get; }
 
         void Complete();
         Task CompleteAsync();

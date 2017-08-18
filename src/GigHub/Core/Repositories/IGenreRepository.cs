@@ -5,6 +5,6 @@ namespace GigHub.Core.Repositories
 {
     public interface IGenreRepository
     {
-        List<Genre> GetGenres();
+        IEnumerable<Genre> GetGenres();
     }
 }
