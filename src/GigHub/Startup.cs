@@ -45,6 +45,8 @@ namespace GigHub
             services.AddScoped<IFollowingRepository, FollowingRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IGigRepository, GigRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
             services.AddMvc()
             .AddJsonOptions(options =>
