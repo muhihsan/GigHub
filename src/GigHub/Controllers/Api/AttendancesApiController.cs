@@ -5,7 +5,7 @@ using GigHub.Data;
 using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using GigHub.Dto;
+using GigHub.Dtos;
 
 namespace GigHub.Controllers.Api
 {

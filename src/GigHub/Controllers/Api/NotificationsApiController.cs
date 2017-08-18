@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GigHub.Data;
-using GigHub.Dto;
+using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
