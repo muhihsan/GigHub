@@ -20,6 +20,7 @@ namespace GigHub.Persistence
         public UnitOfWork(
             ApplicationDbContext context,
             IAttendanceRepository attendanceRepository,
+            IFollowingRepository followingRepository,
             IGenreRepository genreRepository,
             IGigRepository gigRepository,
             INotificationRepository notificationRepository,
@@ -28,6 +29,7 @@ namespace GigHub.Persistence
         {
             _context = context;
             Attendances = attendanceRepository;
+            Followings = followingRepository;
             Genres = genreRepository;
             Gigs = gigRepository;
             Notifications = notificationRepository;
