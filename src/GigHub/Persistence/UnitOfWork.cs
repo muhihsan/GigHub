@@ -10,6 +10,7 @@ namespace GigHub.Persistence
         private readonly ApplicationDbContext _context;
 
         public IAttendanceRepository Attendances { get; private set; }
+        public IFollowingRepository Followings { get; private set; }
         public IGenreRepository Genres { get; private set; }
         public IGigRepository Gigs { get; private set; }
         public IApplicationUserRepository Users { get; private set; }

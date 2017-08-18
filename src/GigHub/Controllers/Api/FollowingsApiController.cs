@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using GigHub.Core;
 
 namespace GigHub.Controllers.Api
 {
@@ -13,12 +14,14 @@ namespace GigHub.Controllers.Api
     [Route("api/followings")]
     public class FollowingsApiController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public FollowingsApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public FollowingsApiController(
+            IUnitOfWork unitOfWork, 
+            UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+           _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
@@ -27,17 +30,18 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            if (_context.Followings.Any(f => f.FollowerId == userId && f.FolloweeId == dto.FolloweeId))
-                return BadRequest("Following already exists.");
+            var following = _unitOfWork.Followings.GetFollowing(userId, dto.FolloweeId);
+            if (following != null)
+            return BadRequest("Following already exists.");
 
-            var following = new Following
+            following = new Following
             {
                 FollowerId = userId,
                 FolloweeId = dto.FolloweeId
             };
 
-            await _context.Followings.AddAsync(following);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Followings.AddAsycn(following);
+            await _unitOfWork.CompleteAsync();
 
             return Ok();
         }
@@ -47,14 +51,13 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            var following = _context.Followings
-                .SingleOrDefault(f => f.FollowerId == userId && f.FolloweeId == followeeId);
+            var following = _unitOfWork.Followings.GetFollowing(userId, followeeId);
 
             if (following == null)
                 return NotFound();
 
-            _context.Followings.Remove(following);
-            await _context.SaveChangesAsync();
+            _unitOfWork.Followings.Remove(following);
+            await _unitOfWork.CompleteAsync();
 
             return Ok(followeeId);
 

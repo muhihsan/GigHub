@@ -1,11 +1,12 @@
 ﻿using GigHub.Core.Models;
+using GigHub.Core.Repositories;
 using GigHub.Persistence.Data;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GigHub.Persistence.Repositories
 {
-    public class FollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -14,11 +15,25 @@ namespace GigHub.Persistence.Repositories
             _context = context;
         }
 
-        public List<Following> GetForUser(string userId)
+        public Following GetFollowing(string followerId, string followeeId)
         {
             return _context.Followings
-               .Where(f => f.FollowerId == userId)
-               .ToList();
+                .SingleOrDefault(f => f.FolloweeId == followeeId && f.FollowerId == followerId);
+        }
+
+        public void Add(Following following)
+        {
+            _context.Followings.Add(following);
+        }
+
+        public Task AddAsycn(Following following)
+        {
+            return _context.Followings.AddAsync(following);
+        }
+
+        public void Remove(Following following)
+        {
+            _context.Followings.Remove(following);
         }
     }
 }
