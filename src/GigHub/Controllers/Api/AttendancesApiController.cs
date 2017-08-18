@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using GigHub.Data;
-using GigHub.Models;
+using GigHub.Persistence.Data;
+using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using GigHub.Dtos;
+using GigHub.Core.Dtos;
 
 namespace GigHub.Controllers.Api
 {

@@ -1,5 +1,5 @@
-﻿using GigHub.Data;
-using GigHub.Models;
+﻿using GigHub.Persistence.Data;
+using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

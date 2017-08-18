@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using GigHub.Data;
-using GigHub.Dtos;
-using GigHub.Models;
+using GigHub.Persistence.Data;
+using GigHub.Core.Dtos;
+using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

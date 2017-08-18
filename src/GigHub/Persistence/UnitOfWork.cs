@@ -1,5 +1,6 @@
-﻿using GigHub.Data;
-using GigHub.Repositories;
+﻿using GigHub.Core;
+using GigHub.Core.Repositories;
+using GigHub.Persistence.Data;
 using System.Threading.Tasks;
 
 namespace GigHub.Persistence

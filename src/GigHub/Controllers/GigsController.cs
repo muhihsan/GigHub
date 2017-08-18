@@ -1,11 +1,10 @@
-﻿using GigHub.Data;
-using GigHub.Models;
-using GigHub.Persistence;
-using GigHub.ViewModels;
+﻿using GigHub.Core.Models;
+using GigHub.Core.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using GigHub.Core;
 
 namespace GigHub.Controllers
 {

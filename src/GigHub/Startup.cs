@@ -4,14 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GigHub.Data;
-using GigHub.Models;
+using GigHub.Persistence.Data;
+using GigHub.Core.Models;
 using GigHub.Services;
 using GigHub.Helpers;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-using GigHub.Repositories;
+using GigHub.Core;
+using GigHub.Core.Repositories;
 using GigHub.Persistence;
+using GigHub.Persistence.Repositories;
 
 namespace GigHub
 {
