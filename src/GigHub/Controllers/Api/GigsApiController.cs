@@ -1,11 +1,9 @@
-﻿using GigHub.Persistence.Data;
-using GigHub.Core.Models;
+﻿using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
+using GigHub.Core;
 
 namespace GigHub.Controllers.Api
 {
@@ -13,12 +11,14 @@ namespace GigHub.Controllers.Api
     [Route("api/gigs")]
     public class GigsApiController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public GigsApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public GigsApiController(
+            IUnitOfWork unitOfWork, 
+            UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
@@ -27,17 +27,19 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            var gig = _context.Gigs
-                .Include(g => g.Attendances)
-                .ThenInclude(a => a.Attendee)
-                .Single(g => g.Id == id && g.ArtistId == userId);
+            var gig = _unitOfWork.Gigs.GetGigWithAttendees(id);
+            if (gig == null)
+                return BadRequest();
 
             if (gig.IsCancelled)
                 return NotFound();
 
+            if (gig.ArtistId != userId)
+                return Unauthorized();
+
             gig.Cancel();
 
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
 
             return Ok();
         }
