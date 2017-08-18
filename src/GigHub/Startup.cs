@@ -42,6 +42,7 @@ namespace GigHub
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IFollowingRepository, FollowingRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IGigRepository, GigRepository>();
 
