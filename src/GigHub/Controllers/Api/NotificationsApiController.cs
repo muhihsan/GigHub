@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using GigHub.Persistence.Data;
 using GigHub.Core.Dtos;
 using GigHub.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using GigHub.Core;
 
 namespace GigHub.Controllers.Api
 {
@@ -15,12 +14,14 @@ namespace GigHub.Controllers.Api
     [Route("api/notifications")]
     public class NotificationsApiController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public NotificationsApiController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public NotificationsApiController(
+            IUnitOfWork unitOfWork, 
+            UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
@@ -28,13 +29,7 @@ namespace GigHub.Controllers.Api
         public IActionResult GetNewNotifications()
         {
             var userId = _userManager.GetUserId(User);
-
-            var notifications = _context.UserNotifications
-                .Where(un => un.UserId == userId && !un.IsRead)
-                .Select(un => un.Notification)
-                .Include(n => n.Gig.Artist)
-                .ToList();
-
+            var notifications = _unitOfWork.Notifications.GetNewNotificationsFor(userId);
             return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
         }
 
@@ -43,13 +38,10 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
 
-            var notifications = _context.UserNotifications
-                .Where(un => un.UserId == userId && !un.IsRead)
-                .ToList();
+            var notifications = _unitOfWork.UserNotifications.GetUserNotificationsFor(userId);
+            notifications.ToList().ForEach(n => n.Read());
 
-            notifications.ForEach(n => n.Read());
-
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
 
             return Ok();
         }
