@@ -24,7 +24,20 @@ namespace GigHub.Persistence.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-            
+
+            builder.Entity<Gig>()
+                .Property(g => g.ArtistId)
+                .IsRequired();
+
+            builder.Entity<Gig>()
+                .Property(g => g.Venue)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            builder.Entity<Gig>()
+                .Property(g => g.GenreId)
+                .IsRequired();
+
             builder.Entity<Attendance>()
                 .HasOne(a => a.Gig)
                 .WithMany(g => g.Attendances)
