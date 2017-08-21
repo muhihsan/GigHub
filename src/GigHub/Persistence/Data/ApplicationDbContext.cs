@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using GigHub.Core.Models;
+using GigHub.Persistence.EntityConfigurations;
 
 namespace GigHub.Persistence.Data
 {
@@ -25,23 +26,7 @@ namespace GigHub.Persistence.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<Gig>()
-                .Property(g => g.ArtistId)
-                .IsRequired();
-
-            builder.Entity<Gig>()
-                .Property(g => g.Venue)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.Entity<Gig>()
-                .Property(g => g.GenreId)
-                .IsRequired();
-
-            builder.Entity<Attendance>()
-                .HasOne(a => a.Gig)
-                .WithMany(g => g.Attendances)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new GigConfiguration());
 
             builder.Entity<Attendance>()
                 .HasKey(a => new { a.GigId, a.AttendeeId });
