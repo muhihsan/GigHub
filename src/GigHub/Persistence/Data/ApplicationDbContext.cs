@@ -29,17 +29,8 @@ namespace GigHub.Persistence.Data
             builder.ApplyConfiguration(new AttendanceConfiguration());
             builder.ApplyConfiguration(new GigConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
-
-            builder.Entity<Following>()
-                .HasKey(c => new { c.FollowerId, c.FolloweeId });
-
-            builder.Entity<UserNotification>()
-                .HasKey(c => new { c.UserId, c.NotificationId });
-
-            builder.Entity<UserNotification>()
-                .HasOne(u => u.User)
-                .WithMany(u => u.UserNotifications)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new FollowingConfiguration());
+            builder.ApplyConfiguration(new UserNotificationConfiguration());
         }
     }
 }
