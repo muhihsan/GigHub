@@ -31,6 +31,7 @@ namespace GigHub.Persistence.Data
             builder.ApplyConfiguration(new FollowingConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new GigConfiguration());
+            builder.ApplyConfiguration(new NotificationConfiguration());
             builder.ApplyConfiguration(new UserNotificationConfiguration());
         }
     }

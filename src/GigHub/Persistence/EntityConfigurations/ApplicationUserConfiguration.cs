@@ -1,6 +1,5 @@
 ﻿using GigHub.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GigHub.Persistence.EntityConfigurations
