@@ -26,10 +26,8 @@ namespace GigHub.Persistence.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
+            builder.ApplyConfiguration(new AttendanceConfiguration());
             builder.ApplyConfiguration(new GigConfiguration());
-
-            builder.Entity<Attendance>()
-                .HasKey(a => new { a.GigId, a.AttendeeId });
 
             builder.Entity<ApplicationUser>()
                 .HasMany(a => a.Followers)
