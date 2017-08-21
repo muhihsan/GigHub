@@ -27,9 +27,10 @@ namespace GigHub.Persistence.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new AttendanceConfiguration());
-            builder.ApplyConfiguration(new GigConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new FollowingConfiguration());
+            builder.ApplyConfiguration(new GenreConfiguration());
+            builder.ApplyConfiguration(new GigConfiguration());
             builder.ApplyConfiguration(new UserNotificationConfiguration());
         }
     }
