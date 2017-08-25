@@ -40,5 +40,10 @@ namespace GigHub.Core.Models
         {
             Attendances.ToList().ForEach(a => a.Attendee.Notify(notification));
         }
+
+        public List<ApplicationUser> GetAttendee()
+        {
+            return Attendances.Select(a => a.Attendee).ToList();
+        }
     }
 }
