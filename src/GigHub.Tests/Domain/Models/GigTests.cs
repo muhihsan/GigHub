@@ -34,9 +34,9 @@ namespace GigHub.Tests.Domain.Models
 
             gig.Modify(newVenue, newDate, genreId);
 
-            var notifications = gig.GetAttendee().First().UserNotifications;
+            var notifications = gig.GetAttendees().First().UserNotifications;
 
-            gig.GetAttendee().First().UserNotifications.Count.Should().Be(1);
+            notifications.Count.Should().Be(1);
             notifications.First().Notification.Type.Should().Be(NotificationType.GigUpdated);
         }
 
@@ -58,7 +58,7 @@ namespace GigHub.Tests.Domain.Models
 
             gig.Cancel();
 
-            var notifications = gig.GetAttendee().First().UserNotifications;
+            var notifications = gig.GetAttendees().First().UserNotifications;
 
             notifications.Count.Should().Be(1);
             notifications.First().Notification.Type.Should().Be(NotificationType.GigCancelled);
