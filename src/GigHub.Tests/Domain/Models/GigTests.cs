@@ -33,11 +33,8 @@ namespace GigHub.Tests.Domain.Models
             var genreId = Byte.MinValue;
 
             gig.Modify(newVenue, newDate, genreId);
-
-            var notifications = gig.GetAttendee().First().UserNotifications;
-
-            notifications.Count.Should().Be(1);
-            notifications.First().Notification.Type.Should().Be(NotificationType.GigUpdated);
+            
+            gig.GetAttendee().First().UserNotifications.Count.Should().Be(1);
         }
 
         [Fact]
@@ -58,10 +55,7 @@ namespace GigHub.Tests.Domain.Models
 
             gig.Cancel();
 
-            var notifications = gig.GetAttendee().First().UserNotifications;
-
-            notifications.Count.Should().Be(1);
-            notifications.First().Notification.Type.Should().Be(NotificationType.GigCancelled);
+            gig.GetAttendee().First().UserNotifications.Count.Should().Be(1);
         }
     }
 }
