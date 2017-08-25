@@ -58,7 +58,10 @@ namespace GigHub.Tests.Domain.Models
 
             gig.Cancel();
 
-            gig.GetAttendee().First().UserNotifications.Count.Should().Be(1);
+            var notifications = gig.GetAttendee().First().UserNotifications;
+
+            notifications.Count.Should().Be(1);
+            notifications.First().Notification.Type.Should().Be(NotificationType.GigCancelled);
         }
     }
 }
