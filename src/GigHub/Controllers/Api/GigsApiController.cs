@@ -29,7 +29,7 @@ namespace GigHub.Controllers.Api
 
             var gig = _unitOfWork.Gigs.GetGigWithAttendees(id);
             if (gig == null)
-                return BadRequest();
+                return NotFound();
 
             if (gig.IsCancelled)
                 return NotFound();
