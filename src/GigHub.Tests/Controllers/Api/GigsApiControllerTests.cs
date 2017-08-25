@@ -12,6 +12,7 @@ namespace GigHub.Tests
 {
     public class GigsApiControllerTests
     {
+        private const string _userId = "1";
         private GigsApiController _controller;
         private Mock<IGigRepository> _mockGigRepository;
 
@@ -22,7 +23,7 @@ namespace GigHub.Tests
             mockUoW.SetupGet(u => u.Gigs).Returns(_mockGigRepository.Object);
             
             var mockUserManager = new Mock<FakeUserManager>();
-            mockUserManager.Setup(u => u.GetUserId(It.IsAny<ClaimsPrincipal>())).Returns("1");
+            mockUserManager.Setup(u => u.GetUserId(It.IsAny<ClaimsPrincipal>())).Returns(_userId);
 
             _controller = new GigsApiController(mockUoW.Object, mockUserManager.Object);
         }
@@ -46,6 +47,18 @@ namespace GigHub.Tests
             var result = _controller.Cancel(1);
 
             result.Result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public void Cancel_UserCancelingAnotherUsersGig_ShouldReturnUnauthorized()
+        {
+            var gig = new Gig { ArtistId = _userId + "_" };
+
+            _mockGigRepository.Setup(r => r.GetGigWithAttendees(1)).Returns(gig);
+
+            var result = _controller.Cancel(1);
+
+            result.Result.Should().BeOfType<UnauthorizedResult>();
         }
     }
 }
