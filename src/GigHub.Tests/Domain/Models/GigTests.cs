@@ -41,7 +41,7 @@ namespace GigHub.Tests.Domain.Models
         }
 
         [Fact]
-        public void Cancel_WhenCalled_ShouldSetIsCanceledToTrue()
+        public void Cancel_WhenCalled_ShouldSetIsCancelledToTrue()
         {
             var gig = new Gig();
 
