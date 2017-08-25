@@ -63,5 +63,26 @@ namespace GigHub.Tests.Domain.Models
             notifications.Count.Should().Be(1);
             notifications.First().Notification.Type.Should().Be(NotificationType.GigCancelled);
         }
+        
+        [Fact]
+        public void GetAttendees_WhenCalled_ReturnAllAttendees()
+        {
+            var gig = new Gig();
+            gig.Attendances.Add(new Attendance { Attendee = new ApplicationUser { Id = "1" } });
+
+            var attendees = gig.GetAttendees();
+
+            attendees.Count.Should().Be(1);
+        }
+
+        [Fact]
+        public void GetAttendees_WhenNoAttendancesAndCalled_ReturnEmptyList()
+        {
+            var gig = new Gig();
+
+            var attendees = gig.GetAttendees();
+
+            attendees.Count.Should().Be(0);
+        }
     }
 }
