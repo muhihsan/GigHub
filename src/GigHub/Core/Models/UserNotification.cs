@@ -10,7 +10,7 @@ namespace GigHub.Core.Models
         public Notification Notification { get; private set; }
         public bool IsRead { get; private set; }
 
-        protected UserNotification()
+        public UserNotification()
         {
         }
 
