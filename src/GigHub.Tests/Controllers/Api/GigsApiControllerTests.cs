@@ -27,15 +27,7 @@ namespace GigHub.Tests
 
             _controller = new GigsApiController(mockUoW.Object, mockUserManager.Object);
         }
-
-        [Fact]
-        public void Cancel_InvalidId_ShouldReturnBadRequest()
-        {
-            var result = _controller.Cancel(0);
-
-            result.Result.Should().BeOfType<BadRequestResult>();
-        }
-
+        
         [Fact]
         public void Cancel_NoGigWithGivenIdExists_ShouldReturnNotFound()
         {

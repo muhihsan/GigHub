@@ -28,17 +28,7 @@ namespace GigHub.Tests
 
             _controller = new AttendancesApiController(mockUoW.Object, mockUserManager.Object);
         }
-
-        [Fact]
-        public void Attend_InvalidGigId_ShouldReturnBadRequest()
-        {
-            var attendanceDto = new AttendanceDto();
-
-            var result = _controller.Attend(attendanceDto);
-
-            result.Result.Should().BeOfType<BadRequestResult>();
-        }
-
+        
         [Fact]
         public void Attend_HadAttended_ShouldReturnBadRequest()
         {
@@ -62,15 +52,7 @@ namespace GigHub.Tests
 
             result.Result.Should().BeOfType<OkResult>();
         }
-
-        [Fact]
-        public void CancelAttendance_InvalidGigId_ShouldReturnBadRequest()
-        {
-            var result = _controller.CancelAttandance(0);
-
-            result.Result.Should().BeOfType<BadRequestResult>();
-        }
-
+        
         [Fact]
         public void CancelAttendance_NeverAttend_ShouldReturnNotFound()
         {
@@ -80,7 +62,7 @@ namespace GigHub.Tests
         }
 
         [Fact]
-        public void CancelAttendance_ValidRequest_ShouldRetrnOk()
+        public void CancelAttendance_ValidRequest_ShouldReturnOk()
         {
             _mockAttendanceRepository
                 .Setup(r => r.GetAttendance(It.IsAny<int>(), It.IsAny<string>()))

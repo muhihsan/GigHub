@@ -25,9 +25,6 @@ namespace GigHub.Controllers.Api
         [HttpDelete("{id}")]
         public async Task<IActionResult> Cancel(int id)
         {
-            if (id < 1)
-                return BadRequest();
-
             var userId = _userManager.GetUserId(User);
 
             var gig = _unitOfWork.Gigs.GetGigWithAttendees(id);
