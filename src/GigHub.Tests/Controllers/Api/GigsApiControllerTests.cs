@@ -42,7 +42,7 @@ namespace GigHub.Tests
             var gig = new Gig();
             gig.Cancel();
 
-            _mockGigRepository.Setup(r => r.GetGigWithAttendees(1)).Returns(gig);
+            _mockGigRepository.Setup(r => r.GetGigWithAttendees(It.IsAny<int>())).Returns(gig);
             
             var result = _controller.Cancel(1);
 
@@ -54,7 +54,7 @@ namespace GigHub.Tests
         {
             var gig = new Gig { ArtistId = _userId + "_" };
 
-            _mockGigRepository.Setup(r => r.GetGigWithAttendees(1)).Returns(gig);
+            _mockGigRepository.Setup(r => r.GetGigWithAttendees(It.IsAny<int>())).Returns(gig);
 
             var result = _controller.Cancel(1);
 
@@ -66,7 +66,7 @@ namespace GigHub.Tests
         {
             var gig = new Gig { ArtistId = _userId };
 
-            _mockGigRepository.Setup(r => r.GetGigWithAttendees(1)).Returns(gig);
+            _mockGigRepository.Setup(r => r.GetGigWithAttendees(It.IsAny<int>())).Returns(gig);
 
             var result = _controller.Cancel(1);
 
