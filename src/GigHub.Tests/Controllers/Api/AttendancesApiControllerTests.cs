@@ -13,7 +13,7 @@ namespace GigHub.Tests
 {
     public class AttendancesApiControllerTests
     {
-        private string _userId = It.IsAny<string>();
+        private string _userId = "1";
         private AttendancesApiController _controller;
         private Mock<IAttendanceRepository> _mockAttendanceRepository;
 
