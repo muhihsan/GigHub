@@ -30,7 +30,7 @@ namespace GigHub.Controllers.Api
 
             var following = _unitOfWork.Followings.GetFollowing(userId, dto.FolloweeId);
             if (following != null)
-            return BadRequest("Following already exists.");
+                return BadRequest("Following already exists.");
 
             following = new Following
             {
