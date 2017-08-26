@@ -41,6 +41,7 @@ namespace GigHub.Tests
             var result = _controller.Attend(attendanceDto);
 
             result.Result.Should().BeOfType<BadRequestObjectResult>();
+            ((BadRequestObjectResult)result.Result).Value.Should().Be("The attendance already exists.");
         }
 
         [Fact]
@@ -64,13 +65,16 @@ namespace GigHub.Tests
         [Fact]
         public void CancelAttendance_ValidRequest_ShouldReturnOk()
         {
+            var gigId = 1;
+
             _mockAttendanceRepository
                 .Setup(r => r.GetAttendance(It.IsAny<int>(), It.IsAny<string>()))
                 .Returns(new Attendance());
 
-            var result = _controller.CancelAttandance(1);
+            var result = _controller.CancelAttandance(gigId);
 
             result.Result.Should().BeOfType<OkObjectResult>();
+            ((OkObjectResult)result.Result).Value.Should().Be(gigId);
         }
     }
 }
