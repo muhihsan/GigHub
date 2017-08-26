@@ -50,6 +50,9 @@ namespace GigHub.Controllers.Api
         [HttpDelete("{gigId}")]
         public async Task<IActionResult> CancelAttandance(int gigId)
         {
+            if (gigId < 1)
+                return BadRequest();
+
             var userId = _userManager.GetUserId(User);
 
             var attendance = _unitOfWork.Attendances.GetAttendance(gigId, userId);

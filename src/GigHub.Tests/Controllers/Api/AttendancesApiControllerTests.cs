@@ -62,5 +62,33 @@ namespace GigHub.Tests
 
             result.Result.Should().BeOfType<OkResult>();
         }
+
+        [Fact]
+        public void CancelAttendance_InvalidGigId_ShouldReturnBadRequest()
+        {
+            var result = _controller.CancelAttandance(0);
+
+            result.Result.Should().BeOfType<BadRequestResult>();
+        }
+
+        [Fact]
+        public void CancelAttendance_NeverAttend_ShouldReturnNotFound()
+        {
+            var result = _controller.CancelAttandance(1);
+
+            result.Result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public void CancelAttendance_ValidRequest_ShouldRetrnOk()
+        {
+            _mockAttendanceRepository
+                .Setup(r => r.GetAttendance(It.IsAny<int>(), It.IsAny<string>()))
+                .Returns(new Attendance());
+
+            var result = _controller.CancelAttandance(1);
+
+            result.Result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }
