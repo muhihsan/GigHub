@@ -29,6 +29,14 @@ namespace GigHub.Tests
         }
 
         [Fact]
+        public void Cancel_InvalidId_ShouldReturnBadRequest()
+        {
+            var result = _controller.Cancel(0);
+
+            result.Result.Should().BeOfType<BadRequestResult>();
+        }
+
+        [Fact]
         public void Cancel_NoGigWithGivenIdExists_ShouldReturnNotFound()
         {
             var result = _controller.Cancel(1);
