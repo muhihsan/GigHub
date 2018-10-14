@@ -12,7 +12,7 @@ namespace GigHub.Tests.Domain.Models
         {
             Action act = () => new UserNotification(null, Notification.GigCreated(new Gig()));
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace GigHub.Tests.Domain.Models
         {
             Action act = () => new UserNotification(new ApplicationUser(), null);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
