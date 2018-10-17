@@ -1,7 +1,7 @@
 ﻿using GigHub.Core.Models;
 using System.Linq;
 
-namespace GigHub.Core.ViewModels
+namespace GigHub.ViewModels
 {
     public class GigDetailsViewModel
     {

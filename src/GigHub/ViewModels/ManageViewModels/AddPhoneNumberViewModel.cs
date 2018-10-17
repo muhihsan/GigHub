@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Core.ViewModels.ManageViewModels
+namespace GigHub.ViewModels.ManageViewModels
 {
-    public class VerifyPhoneNumberViewModel
+    public class AddPhoneNumberViewModel
     {
-        [Required]
-        public string Code { get; set; }
-
         [Required]
         [Phone]
         [Display(Name = "Phone number")]

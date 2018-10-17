@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GigHub.Core.Models;
 using System.Linq;
-using GigHub.Core.ViewModels;
+using GigHub.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using GigHub.Core;
 

@@ -22,4 +22,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0-preview2-final" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GigHub.Core\GigHub.Core.csproj" />
+    <ProjectReference Include="..\GigHub.Persistence\GigHub.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

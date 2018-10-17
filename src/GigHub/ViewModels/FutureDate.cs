@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
-namespace GigHub.Core.ViewModels
+namespace GigHub.ViewModels
 {
     public sealed class FutureDate : ValidationAttribute
     {

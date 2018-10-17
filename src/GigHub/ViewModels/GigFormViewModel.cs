@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using GigHub.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GigHub.Core.ViewModels
+namespace GigHub.ViewModels
 {
     public class GigFormViewModel
     {
