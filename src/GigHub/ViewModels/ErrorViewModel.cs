@@ -1,4 +1,4 @@
-namespace GigHub.Core.ViewModels
+namespace GigHub.ViewModels
 {
     public class ErrorViewModel
     {

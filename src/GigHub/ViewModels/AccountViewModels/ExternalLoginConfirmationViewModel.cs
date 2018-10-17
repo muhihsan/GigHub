@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Core.ViewModels.AccountViewModels
+namespace GigHub.ViewModels.AccountViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {

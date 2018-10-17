@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GigHub.Core.ViewModels
+namespace GigHub.ViewModels
 {
     public class GigsViewModel
     {
