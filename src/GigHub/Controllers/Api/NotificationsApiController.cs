@@ -30,7 +30,7 @@ namespace GigHub.Controllers.Api
         {
             var userId = _userManager.GetUserId(User);
             var notifications = _unitOfWork.Notifications.GetNewNotificationsFor(userId);
-            return Ok(notifications.Select(Mapper.Map<Notification, NotificationDto>));
+            return Ok(notifications.Select( Mapper.Map<Notification, NotificationDto>));
         }
 
         [HttpPost("markAsRead")]
